@@ -5,8 +5,9 @@ import AiCode from "@/components/customMessageForms/AiCode"
 import StandardMessageForm from "@/components/customMessageForms/StandardMessageForm"
 import { MultiChatSocket, MultiChatWindow, useMultiChatLogic } from "react-chat-engine-advanced"
 
-const Chat = () => {
-    const chatProps = useMultiChatLogic(import.meta.env.VITE_PROJECT_ID, "testuser", "1234")
+const Chat = ({ user, secret }) => {
+    const chatProps = useMultiChatLogic(import.meta.env.VITE_PROJECT_ID, user, secret)
+
     return (
         <div style={{ flexBasis: "100%" }}>
             <MultiChatSocket {...chatProps} />
@@ -14,7 +15,7 @@ const Chat = () => {
                 {...chatProps}
                 style={{ height: "100vh" }}
                 renderChatHeader={chat => <Header chat={chat} />}
-                renderChatMessageForm={props => {
+                renderMessageForm={props => {
                     if (chatProps.chat?.title.startsWith("AiChat_")) {
                         return <Ai props={props} activeChat={chatProps.chat} />
                     }
@@ -24,6 +25,7 @@ const Chat = () => {
                     if (chatProps.chat?.title.startsWith("AiAssist_")) {
                         return <AiAssist props={props} activeChat={chatProps.chat} />
                     }
+
                     return <StandardMessageForm props={props} activeChat={chatProps.chat} />
                 }}
             />
