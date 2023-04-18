@@ -1,7 +1,7 @@
 import { api } from "@/state/api"
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import ReactDOM from "react-dom/client"
+import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 import App from "./App"
 import "./index.scss"
